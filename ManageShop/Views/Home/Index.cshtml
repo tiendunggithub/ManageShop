@@ -1,0 +1,141 @@
+﻿@model ManageShop.Models.Home
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="home" id="home">
+    <div class="slide_show">
+        <div class="slider">
+            <div class="slides">
+                <input type="radio" name="radio-btn" id="radio1">
+                <input type="radio" name="radio-btn" id="radio2">
+                <input type="radio" name="radio-btn" id="radio3">
+                <input type="radio" name="radio-btn" id="radio4">
+                <!-- slide img start -->
+                <div class="slide first">
+                    <img src="~/Asset/images/bn98.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img src="~/Asset/images/bn97.png" alt="">
+                </div>
+                <div class="slide">
+                    <img src="~/Asset/images/bn2.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img src="~/Asset/images/bn4.jpg" alt="">
+                </div>
+                <!-- slide img end -->
+                <!-- start -->
+                <div class="navigation-auto">
+                    <div class="auto-btn1"></div>
+                    <div class="auto-btn2"></div>
+                    <div class="auto-btn3"></div>
+                    <div class="auto-btn4"></div>
+                </div>
+                <!-- end -->
+            </div>
+            <!-- start -->
+            <div class="navigation-manual">
+                <label for="radio1" class="manual-btn"></label>
+                <label for="radio2" class="manual-btn"></label>
+                <label for="radio3" class="manual-btn"></label>
+                <label for="radio4" class="manual-btn"></label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="highlights">
+    <div class="row">
+        <div class="col-md-9">
+            <h4>
+                Sản Phẩm <strong style="color:red">
+                    Hot
+                    <div class="spinner-grow text-danger"></div>
+                </strong>
+            </h4>
+            <hr width="100%">
+            <div class="wrapper" data-aos="fade-up">
+                @foreach (var item in Model.ListProduct.Take(9))
+                {
+                    <div class="card">
+                        <div class="card-img thumbnail">
+                            <img src="~/Image/@item.Image" />
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">
+                                @*<h5 class="card-title">@item.NameProduct</h5>*@
+                                <p class="test1">@Html.DisplayFor(modelItem => item.NameProduct)</p>
+                                @*<a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.NameProduct)</a>*@
+                            </div>
+                            <div class="price">
+                                @Html.DisplayFor(modelItem => item.Price) VNĐ
+                            </div>
+                            <a href="#" class="btn btn-danger">Mua ngay</a>
+                            <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id" class="btn btn-primary">Xem thêm</a>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-3">
+            <h4>Danh mục sản phẩm</h4>
+            <ul class="nav flex-column">
+                @foreach (var item in Model.ListCategory)
+                {
+                    <li>
+                        <a asp-action="ProductCate" asp-controller="Categories" asp-route-id="@item.CategoryID">@item.Name</a>
+                    </li>
+                }
+            </ul>
+            <marquee>
+                <p style="font-size: 21px; color: red">
+                    <strong>
+                        <i class="fas fa-bolt"></i> SALE UP TO - FLASH SALE <i class="fas fa-bolt"></i>
+                    </strong>
+                </p>
+            </marquee>
+            <center>
+                <a href="#"><img src="~/Asset/images/fl1.gif" height="300" width="300"></a>
+                <pre></pre>
+                <a href="#"><img src="~/Asset/images/fl2.gif" height="150" width="300"></a>
+            </center>
+            <br>
+        </div>
+        <br>
+    </div>
+</div>
+<div class="about">
+    <h1 class="heading"> Tại sao nên chọn chúng tôi? </h1>
+    <div class="row">
+
+        <div class="image">
+            <img src="images/about-img.png" alt="">
+        </div>
+
+        <div class="content">
+            <h3>best food in the country</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, sequi corrupti corporis quaerat voluptatem ipsam neque labore modi autem, saepe numquam quod reprehenderit rem? Tempora aut soluta odio corporis nihil!</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, nemo. Sit porro illo eos cumque deleniti iste alias, eum natus.</p>
+            <div class="icons-container">
+                <div class="icons">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>free delivery</span>
+                </div>
+                <div class="icons">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span>easy payments</span>
+                </div>
+                <div class="icons">
+                    <i class="fas fa-headset"></i>
+                    <span>24/7 service</span>
+                </div>
+            </div>
+            <a href="#" class="btn">learn more</a>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/script.js"></script>
+<script>AOS.init();</script>

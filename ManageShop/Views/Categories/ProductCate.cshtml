@@ -1,0 +1,50 @@
+﻿@*@model IEnumerable<ManageShop.Models.Product>*@
+@model PaginatedList<ManageShop.Models.Product>
+@{
+    ViewData["Title"] = "Danh mục";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="home" id="home">
+    <div class="wrapper">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-img">
+                    <img src="css/img/bg.jpg" alt="########">
+                </div>
+                <div class="card-content">
+                    <div class="title">
+                        <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.NameProduct)</a>
+                    </div>
+                    <div class="price">
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </div>
+                    <div class="description">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+    <nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+</div>
+@{
+    var prevDisabled = !Model.PreviousPage ? "disable" : "";
+    var nextDisabled = !Model.NextPage ? "disable" : "";
+}
+

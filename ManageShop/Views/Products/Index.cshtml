@@ -1,0 +1,102 @@
+﻿@model PaginatedList<ManageShop.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="home" id="home">
+    <div class="wrapper">
+        @foreach (var item in Model)
+        {
+        <div class="card">
+            <div class="card-img thumbnail">
+                <img src="~/Image/@item.Image" />
+            </div>
+            <div class="card-body">
+                <div class="card-title">
+                    @*<h5 class="card-title">@item.NameProduct</h5>*@
+                    <p class="test1">@Html.DisplayFor(modelItem => item.NameProduct)</p>
+                    @*<a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.NameProduct)</a>*@
+                </div>
+                <div class="price">
+                    @Html.DisplayFor(modelItem => item.Price) VNĐ
+                </div>
+                <a href="#" class="btn btn-danger">Mua ngay</a>
+                <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id" class="btn btn-primary">Xem thêm</a>
+            </div>
+
+        </div>
+        }
+    </div>
+    @*<div class="row">
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.NameProduct)</h5>
+                        <p class="price">@Html.DisplayFor(modelItem => item.Price)</p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Desciption)</p>
+                        <a href="#" class="btn btn-outline-danger">Mua Ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+    @*<table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NameProduct)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Category)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameProduct)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>*@
+    @{
+        var prevDisabled = !Model.PreviousPage ? "disable" : "";
+        var nextDisabled = !Model.NextPage ? "disable" : "";
+    }
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link @prevDisabled" asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @*<li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>*@
+            <li class="page-item">
+                <a class="page-link @nextDisabled" asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

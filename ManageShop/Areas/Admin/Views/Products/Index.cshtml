@@ -1,0 +1,127 @@
+﻿@model IEnumerable<ManageShop.Models.Product>
+
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+    Layout = "_AdminLayout";
+}
+@*
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameProduct)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Desciption)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameProduct)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Desciption)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryID)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+<div class="text">
+    <div class="row">
+        <div class="col-sm-6">
+            <span>
+                Danh sách sản phẩm
+            </span>
+        </div>
+        <div class="col-sm-6" style="text-align:right">
+            <span>Xin chào @ViewBag.Name</span>
+        </div>
+    </div>
+    <hr />
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            @if (ViewBag.Role == "Admin")
+            {
+                <a asp-action="Create" class="btn btn-success">Thêm sản phẩm</a>}
+            </div>
+        <div class="col-md-6">
+            <form class="input-group w-50 float-right" asp-action="Search" method="get">
+                <input type="text" class="form-control" placeholder="tìm kiếm...." name="term" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+    <div class="wrap-table100">
+        <div class="table100 ver1 m-b-110">
+            <div class="table100-head">
+                <table>
+                    <thead>
+                        <tr class="row100 head">
+                            <th class="cell100 column1">@Html.DisplayNameFor(model => model.NameProduct)</th>
+                            <th class="cell100 column2">@Html.DisplayNameFor(model => model.Price)</th>
+                            @*<th class="cell100 column3">@Html.DisplayNameFor(model => model.Description)</th>*@
+                            <th class="cell100 column4">@Html.DisplayNameFor(model => model.Image)</th>
+                            <th class="cell100 column5">Danh mục</th>
+                            <th class="cell100 column6"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div class="table100-body js-pscroll">
+                <table>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="row100 body">
+                                <td class="cell100 column1">@Html.DisplayFor(modelItem => item.NameProduct)</td>
+                                <td class="cell100 column2">@Html.DisplayFor(modelItem => item.Price)</td>
+                                @*<td class="cell100 column3">@Html.DisplayFor(modelItem => item.Description)</td>*@
+                                <td class="cell100 column4">
+                                    <img style="width:100px; height:100px;" src="~/Image/@item.Image" />
+                                </td>
+                                <td class="cell100 column5">@Html.DisplayFor(modelItem => item.Category.Name)</td>
+                                <td class="cell100 column6">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info mx-2"><i class='bx bxs-detail'></i></a>
+                                    @if (ViewBag.Role == "Admin"){
+
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-2"><i class='bx bx-edit'></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-2"><i class='bx bxs-coffee-togo'></i></a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

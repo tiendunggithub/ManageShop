@@ -1,0 +1,81 @@
+﻿@model ManageShop.Models.Product
+
+@{
+    Layout = "_AdminLayout";
+}
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#txt_description'), {
+                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+    </script>
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div class="text">
+        Chỉnh sửa
+        <hr />
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="NameProduct" class="control-label"></label>
+                        <input asp-for="NameProduct" class="form-control" />
+                        <span asp-validation-for="NameProduct" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ImageFile" for="formFileSm" class="form-label">Hình ảnh</label>
+                        <input asp-for="ImageFile" class="form-control form-control-sm" id="formFileSm"
+                               accept="image/*" placeholder="@("~/image/"+Model.Image)" />
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Category" class="control-label"></label>
+                        <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.CategoryID">
+                            <option value="">--Chọn Danh Mục--</option>
+                            <span asp-validation-for="CategoryID" class="text-danger"></span>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea rows="3" asp-for="Description" class="form-control" id="txt_description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</body>
+</html>
